@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.2.2 (Python 3.9.2 on darwin)" generated="20220220 12:56:36.600" rpa="false">
+<suite id="s1" name="Api Get Request" source="/Users/shah/PycharmProjects/robot_framework_get_request/api_get_request.robot">
+<test id="s1-t1" name="get_post_info">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>my_session</arg>
+<arg>${base_url}</arg>
+</arguments>
+<msg timestamp="20220220 12:56:36.783" level="INFO">Creating Session using : alias=my_session, url=https://jsonplaceholder.typicode.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20220220 12:56:36.783" endtime="20220220 12:56:36.784"></status>
+</kw>
+<kw name="Get On Session" library="RequestsLibrary">
+<arguments>
+<arg>my_session</arg>
+<arg>${post}</arg>
+</arguments>
+<assign>
+<var>${my_response}</var>
+</assign>
+<msg timestamp="20220220 12:56:37.010" level="INFO">GET Request : url=https://jsonplaceholder.typicode.com/posts/1 
+ path_url=/posts/1 
+ headers={'User-Agent': 'python-requests/2.25.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220220 12:56:37.010" level="INFO">GET Response : url=https://jsonplaceholder.typicode.com/posts/1 
+ status=200, reason=OK 
+ headers={'Date': 'Sun, 20 Feb 2022 10:56:37 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'x-powered-by': 'Express', 'x-ratelimit-limit': '1000', 'x-ratelimit-remaining': '999', 'x-ratelimit-reset': '1636789608', 'vary': 'Origin, Accept-Encoding', 'access-control-allow-credentials': 'true', 'cache-control': 'max-age=43200', 'pragma': 'no-cache', 'expires': '-1', 'x-content-type-options': 'nosniff', 'etag': 'W/"124-yiKdLzqO5gfBrJFrcdJ8Yq0LGnU"', 'via': '1.1 vegur', 'CF-Cache-Status': 'HIT', 'Age': '11068', 'Expect-CT': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=OQ8miMTyO1MJD6RfRPPHfRPBtEPaCTVOm14TnmqkwhNGWhpy%2BS9KWDJ79PrdRR73iu1WpbEYEnQHhcHnQ7R7Wyc18de5ZmeYpx30Z117FNOAp%2BP53w76nCoJ7STW%2B4N8UsyWOPzC9NdGGn%2BuzkWS"}],"group":"cf-nel","max_age":604800}', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'CF-RAY': '6e073597eede0b59-OSL', 'Content-Encoding': 'gzip', 'alt-svc': 'h3=":443"; ma=86400, h3-29=":443"; ma=86400'} 
+ body={
+  "userId": 1,
+  "id": 1,
+  "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+  "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+} 
+ </msg>
+<msg timestamp="20220220 12:56:37.011" level="INFO">/usr/local/lib/python3.9/site-packages/urllib3/connectionpool.py:1013: InsecureRequestWarning: Unverified HTTPS request is being made to host 'jsonplaceholder.typicode.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20220220 12:56:37.011" level="INFO">${my_response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220220 12:56:36.784" endtime="20220220 12:56:37.011"></status>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<doc>Converts the given item to a Unicode string.</doc>
+<arguments>
+<arg>${my_response.status_code}</arg>
+</arguments>
+<assign>
+<var>${status_code}</var>
+</assign>
+<msg timestamp="20220220 12:56:37.012" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20220220 12:56:37.011" endtime="20220220 12:56:37.013"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${status_code}</arg>
+<arg>200</arg>
+</arguments>
+<status status="PASS" starttime="20220220 12:56:37.013" endtime="20220220 12:56:37.014"></status>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<doc>Converts the given item to a Unicode string.</doc>
+<arguments>
+<arg>${my_response.content}</arg>
+</arguments>
+<assign>
+<var>${response_content}</var>
+</assign>
+<msg timestamp="20220220 12:56:37.016" level="INFO">${response_content} = {
+  "userId": 1,
+  "id": 1,
+  "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+  "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nrepr...</msg>
+<status status="PASS" starttime="20220220 12:56:37.015" endtime="20220220 12:56:37.016"></status>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<arguments>
+<arg>${response_content}</arg>
+<arg>architecto</arg>
+</arguments>
+<status status="PASS" starttime="20220220 12:56:37.017" endtime="20220220 12:56:37.017"></status>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<doc>Converts the given item to a Unicode string.</doc>
+<arguments>
+<arg>${my_response.headers}</arg>
+</arguments>
+<assign>
+<var>${reponse_header}</var>
+</assign>
+<msg timestamp="20220220 12:56:37.019" level="INFO">${reponse_header} = {'Date': 'Sun, 20 Feb 2022 10:56:37 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'x-powered-by': 'Express', 'x-ratelimit-limit':...</msg>
+<status status="PASS" starttime="20220220 12:56:37.018" endtime="20220220 12:56:37.019"></status>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<arguments>
+<arg>${reponse_header}</arg>
+<arg>Express</arg>
+</arguments>
+<status status="PASS" starttime="20220220 12:56:37.019" endtime="20220220 12:56:37.020"></status>
+</kw>
+<kw name="Get From Dictionary" library="Collections">
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<arguments>
+<arg>${my_response.headers}</arg>
+<arg>Content-Type</arg>
+</arguments>
+<assign>
+<var>${content_type_value}</var>
+</assign>
+<msg timestamp="20220220 12:56:37.021" level="INFO">${content_type_value} = application/json; charset=utf-8</msg>
+<status status="PASS" starttime="20220220 12:56:37.020" endtime="20220220 12:56:37.021"></status>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<arguments>
+<arg>${content_type_value}</arg>
+<arg>application/json</arg>
+</arguments>
+<status status="PASS" starttime="20220220 12:56:37.021" endtime="20220220 12:56:37.022"></status>
+</kw>
+<status status="PASS" starttime="20220220 12:56:36.782" endtime="20220220 12:56:37.023" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20220220 12:56:36.603" endtime="20220220 12:56:37.025"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0">Critical Tests</stat>
+<stat pass="1" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" id="s1" name="Api Get Request">Api Get Request</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
