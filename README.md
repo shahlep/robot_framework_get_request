@@ -1,1 +1,1 @@
-# robot_framework_get_request
+# API get request example
